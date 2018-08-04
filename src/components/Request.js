@@ -95,7 +95,7 @@ class Request extends Component {
                 </List>
               </CardActions>
               <CardText expendable={true}>
-              <iframe 
+              {/* <iframe 
   width="300" 
   height="170" 
   frameborder="0" 
@@ -114,7 +114,7 @@ class Request extends Component {
    >
      See map bigger
    </a>
- </small>
+ </small> */}
               </CardText>
             </Card>
             <br />

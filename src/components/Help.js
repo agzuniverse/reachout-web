@@ -58,7 +58,7 @@ class Help extends Component {
                             first_aid:true,
                             blankets:true,
                             clothes:true,
-                            medical:true,
+                            medical:false,
                             transport:true,
                             ppl:4,
                             desc:'Help me please',
@@ -94,23 +94,45 @@ class Help extends Component {
               <CardActions>
                 <div>
                 <i style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blood Group: {details.user.bloodgroup}</i>
-                <p style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has requested for:</p> 
+                <p style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has requested for:</p>
                 {
                     Object.keys(details.resources).map(item => {
                             if(item != 'desc' && item != 'ppl') {
                                 var bool = details.resources[item];
                                 console.log(details.resources[item]);
                                 if(bool === true)
-                                    // return (<ListItem primaryText={item} rightIcon={<ActionInfo />} />)
-                                    return(<FlatButton label={item} />)
+                                    return(<FlatButton style={{color:'green'}} label={item.replace("_", " ")} />)
+                                else
+                                    return(<FlatButton style={{color:'red'}} label={item.replace("_", " ")} />)
                             }
                         }
                     )
                 }   
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <FlatButton lable={"Help Done"} />
                 </div>
               </CardActions>
               <CardText expendable={true}>
-              
+
+                {/* <iframe 
+                 width="300" 
+                 height="170" 
+                 frameborder="0" 
+                 scrolling="no" 
+                 marginheight="0" 
+                 marginwidth="0" 
+                 src={"https://maps.google.com/maps?q='+" + details.location.latitude + "+','+" + details.location.longitude + "+'&hl=es;z=14&amp;output=embed"}
+                >
+                </iframe>
+                <br />
+                <small>
+                  <a 
+                   href={"https://maps.google.com/maps?q='+" + details.location.latitude + "+','+" + details.location.longitude + "+'&hl=es;z=14&amp;output=embed"}
+                   style="color:#0000FF;text-align:left" 
+                   target="_blank"
+                  >
+                    See map bigger
+                  </a>
+                </small> */}
               </CardText>
             </Card>
             <br />
