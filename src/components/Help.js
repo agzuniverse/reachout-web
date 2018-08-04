@@ -50,7 +50,7 @@ class Help extends Component {
               <CardActions>
                 <div>
                 <i style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blood Group: {details.user.bloodgroup}</i>
-                <p style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has requested for:</p>
+                <p style={{fontSize: '14px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has requested for:</p>
                 {
                     Object.keys(details.resources).map(item => {
                             if(item != 'desc' && item != 'ppl') {
@@ -63,7 +63,7 @@ class Help extends Component {
                         }
                     )
                 }   
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <RaisedButton secondary={true} label={"Help Done"} />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <RaisedButton style={{marginLeft: '170px'}} secondary={true} label={"Help Done"} />
                 </div>
               </CardActions>
               <CardText expendable={true}>
