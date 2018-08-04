@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Help from './components/Help';
 import Request from './components/Request';
-import Statistics from './components/Statistics';
+// import Statistics from './components/Statistics';
 
 class App extends Component {
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
            <div>
               <Route exact path='/help' component={Help} />
               <Route exact path='/request' component={Request} />
-              <Route exact path='/statistics' component={Statistics} />
+              {/* <Route exact path='/statistics' component={Statistics} /> */}
               {/* <Path exact path='/' */}
             </div>
          </Router>
