@@ -40,31 +40,6 @@ class Help extends Component {
                         }
                     }
                 },
-                {
-                    details: {
-                        user:{
-                            name:'John Doe',
-                            bloodgroup:'A+',
-                            phone:'8089967299',
-                        },
-                        location: {
-                            latitude:'80.8999',
-                            longitude:'80.6767',
-                        },
-                        resources: {
-                            food:true,
-                            water:true,
-                            shelter:true,
-                            first_aid:true,
-                            blankets:true,
-                            clothes:true,
-                            medical:false,
-                            transport:true,
-                            ppl:4,
-                            desc:'Help me please',
-                        }
-                    }
-                }
             ],
         };
     }
@@ -73,9 +48,14 @@ class Help extends Component {
     componentWillMount() {
         let URL = "https://8f555758.ngrok.io/api/getallreqs";
         var xhttp = new XMLHttpRequest();
+        let MainComp = this;
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-               console.log(JSON.parse(xhttp.responseText));
+               let c = JSON.parse(xhttp.responseText);
+               console.log(c);
+                MainComp.setState({
+                   data: c.data,
+               });
             }
         };
         xhttp.open("GET", URL, true);
@@ -99,7 +79,6 @@ class Help extends Component {
                     Object.keys(details.resources).map(item => {
                             if(item != 'desc' && item != 'ppl') {
                                 var bool = details.resources[item];
-                                console.log(details.resources[item]);
                                 if(bool === true)
                                     return(<FlatButton style={{color:'green'}} label={item.replace("_", " ")} />)
                                 else
@@ -141,7 +120,62 @@ class Help extends Component {
 
 
     render() {
-        this.state.data.forEach(item => console.log(item.details));
+        const cards = this.state.data.map(details => {
+            <div className='Card'>
+            <Card>
+              <CardHeader
+                title={details.user.name}
+                subtitle={"Mobile Number: " + details.user.phone}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardActions>
+                <div>
+                <i style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blood Group: {details.user.bloodgroup}</i>
+                <p style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has requested for:</p>
+                {
+                    Object.keys(details.resources).map(item => {
+                            if(item != 'desc' && item != 'ppl') {
+                                var bool = details.resources[item];
+                                if(bool === true)
+                                    return(<FlatButton style={{color:'green'}} label={item.replace("_", " ")} />)
+                                else
+                                    return(<FlatButton style={{color:'red'}} label={item.replace("_", " ")} />)
+                            }
+                        }
+                    )
+                }   
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <FlatButton lable={"Help Done"} />
+                </div>
+              </CardActions>
+              <CardText expendable={true}>
+
+                {/* <iframe 
+                 width="300" 
+                 height="170" 
+                 frameborder="0" 
+                 scrolling="no" 
+                 marginheight="0" 
+                 marginwidth="0" 
+                 src={"https://maps.google.com/maps?q='+" + details.location.latitude + "+','+" + details.location.longitude + "+'&hl=es;z=14&amp;output=embed"}
+                >
+                </iframe>
+                <br />
+                <small>
+                  <a 
+                   href={"https://maps.google.com/maps?q='+" + details.location.latitude + "+','+" + details.location.longitude + "+'&hl=es;z=14&amp;output=embed"}
+                   style="color:#0000FF;text-align:left" 
+                   target="_blank"
+                  >
+                    See map bigger
+                  </a>
+                </small> */}
+              </CardText>
+            </Card>
+            <br />
+        </div>
+        });
+        
         return(
         <MuiThemeProvider>
             <div className="Help">
