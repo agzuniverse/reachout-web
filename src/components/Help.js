@@ -69,17 +69,32 @@ class Help extends Component {
         };
     }
 
+
+    componentWillMount() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("HERE");
+               // Typical action to be performed when the document is ready:
+               console.log(xhttp.responseText);
+            }
+        };
+        xhttp.open("GET", "https://440f738a.ngrok.io/api/getallreqs", true);
+    }
+
     genCard = (details) => (
         <div className='Card'>
             <Card>
               <CardHeader
                 title={details.user.name}
-                subtitle={details.user.bloodgroup + ';' + details.user.phone}
+                subtitle={"Mobile Number: " + details.user.phone}
                 actAsExpander={true}
                 showExpandableButton={true}
               />
               <CardActions>
-                <List>
+                <div>
+                <i style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blood Group: {details.user.bloodgroup}</i>
+                <p style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has requested for:</p> 
                 {
                     Object.keys(details.resources).map(item => {
                             if(item != 'desc' && item != 'ppl') {
@@ -92,9 +107,10 @@ class Help extends Component {
                         }
                     )
                 }   
-                </List>
+                </div>
               </CardActions>
               <CardText expendable={true}>
+              
               </CardText>
             </Card>
             <br />
