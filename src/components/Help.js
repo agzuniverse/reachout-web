@@ -3,9 +3,10 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import {List, ListItem} from 'material-ui/List';
 import ActionInfo from 'material-ui/svg-icons/action/info';
+import FlatButton from 'material-ui/FlatButton';
+
 import '../css/Help.css';
 
 class Help extends Component {
@@ -13,62 +14,109 @@ class Help extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            details:[{
-                name: 'Aswin',
-                location: 'Vytilla',
-                requesting: [
-                    'Food',
-                    'Water',
-                ],
-            },            
-            {
-                name:'Vivek',
-                location: 'SN',
-                requesting: [
-                    'Food',
-                    'water',
-                ],
-            }
+            data: [
+                {
+                    details: {
+                        user:{
+                            name:'John Doe',
+                            bloodgroup:'A+',
+                            phone:'8089967299',
+                        },
+                        location: {
+                            latitude:'80.8999',
+                            longitude:'80.6767',
+                        },
+                        resources: {
+                            food:true,
+                            water:true,
+                            shelter:true,
+                            first_aid:true,
+                            blankets:true,
+                            clothes:true,
+                            medical:true,
+                            transport:true,
+                            ppl:4,
+                            desc:'Help me please',
+                        }
+                    }
+                },
+                {
+                    details: {
+                        user:{
+                            name:'John Doe',
+                            bloodgroup:'A+',
+                            phone:'8089967299',
+                        },
+                        location: {
+                            latitude:'80.8999',
+                            longitude:'80.6767',
+                        },
+                        resources: {
+                            food:true,
+                            water:true,
+                            shelter:true,
+                            first_aid:true,
+                            blankets:true,
+                            clothes:true,
+                            medical:true,
+                            transport:true,
+                            ppl:4,
+                            desc:'Help me please',
+                        }
+                    }
+                }
             ],
-        }
+        };
     }
 
     genCard = (details) => (
-        <Card>
-          <CardHeader
-            title={details.name}
-            subtitle={details.location}
-            actAsExpander={true}
-            showExpandableButton={true}
-          />
-          <CardActions>
-            <List>
-            {
-                details.requesting.map((item) => 
-                    (<ListItem primaryText={ item } rightIcon={<ActionInfo />} />)
-                )
-            }   
-            </List>
-          </CardActions>
-          <CardText expendable={true}>
-            <div class="mapouter"><div class="gmap_canvas"><iframe width="639" height="387" id="gmap_canvas" src="https://maps.google.com/maps?q=university%20of%20san%20francisco&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.crocothemes.net">crocothemes.net</a></div><style>.mapouter{text-align:right;height:387px;width:639px;}.gmap_canvas {overflow:hidden;background:none!important;height:387px;width:639px;}</style></div>
-          </CardText>
-        </Card>
+        <div className='Card'>
+            <Card>
+              <CardHeader
+                title={details.user.name}
+                subtitle={details.user.bloodgroup + ';' + details.user.phone}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardActions>
+                <List>
+                {
+                    Object.keys(details.resources).map(item => {
+                            if(item != 'desc' && item != 'ppl') {
+                                var bool = details.resources[item];
+                                console.log(details.resources[item]);
+                                if(bool === true)
+                                    // return (<ListItem primaryText={item} rightIcon={<ActionInfo />} />)
+                                    return(<FlatButton label={item} />)
+                            }
+                        }
+                    )
+                }   
+                </List>
+              </CardActions>
+              <CardText expendable={true}>
+              </CardText>
+            </Card>
+            <br />
+        </div>
     );
 
+
     render() {
-        console.log(this.state);
+        this.state.data.forEach(item => console.log(item.details));
         return(
         <MuiThemeProvider>
             <div className="Help">
               <AppBar
-                title={<span >Help</span>}
+                title={<span>Help</span>}
               />
-                { this.state.details.map((details) => this.genCard(details)) }
+              <div className='Items'>
+                { this.state.data.map(object => this.genCard(object.details)) }
+            </div>
             </div>
         </MuiThemeProvider>
         );
     }
 }
 
-export default withGoogleMap(Help);
+export default Help;
