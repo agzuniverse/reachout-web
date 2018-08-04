@@ -6,6 +6,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import {List, ListItem} from 'material-ui/List';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import '../css/Help.css';
 
@@ -62,7 +63,7 @@ class Help extends Component {
                         }
                     )
                 }   
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <FlatButton lable={"Help Done"} />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <RaisedButton secondary={true} label={"Help Done"} />
                 </div>
               </CardActions>
               <CardText expendable={true}>
