@@ -71,15 +71,15 @@ class Help extends Component {
 
 
     componentWillMount() {
+        let URL = "https://8f555758.ngrok.io/api/getallreqs";
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                console.log("HERE");
-               // Typical action to be performed when the document is ready:
-               console.log(xhttp.responseText);
+               console.log(JSON.parse(xhttp.responseText));
             }
         };
-        xhttp.open("GET", "https://440f738a.ngrok.io/api/getallreqs", true);
+        xhttp.open("GET", URL, true);
+        xhttp.send();
     }
 
     genCard = (details) => (
