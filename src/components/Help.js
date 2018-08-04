@@ -14,33 +14,7 @@ class Help extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [
-                {
-                    details: {
-                        user:{
-                            name:'John Doe',
-                            bloodgroup:'A+',
-                            phone:'8089967299',
-                        },
-                        location: {
-                            latitude:'80.8999',
-                            longitude:'80.6767',
-                        },
-                        resources: {
-                            food:true,
-                            water:true,
-                            shelter:true,
-                            first_aid:true,
-                            blankets:true,
-                            clothes:true,
-                            medical:true,
-                            transport:true,
-                            ppl:4,
-                            desc:'Help me please',
-                        }
-                    }
-                },
-            ],
+           data: [], 
         };
     }
 
@@ -64,6 +38,7 @@ class Help extends Component {
 
     genCard = (details) => (
         <div className='Card'>
+        {console.log(details)}
             <Card>
               <CardHeader
                 title={details.user.name}
@@ -79,7 +54,7 @@ class Help extends Component {
                     Object.keys(details.resources).map(item => {
                             if(item != 'desc' && item != 'ppl') {
                                 var bool = details.resources[item];
-                                if(bool === true)
+                                if(bool === "true")
                                     return(<FlatButton style={{color:'green'}} label={item.replace("_", " ")} />)
                                 else
                                     return(<FlatButton style={{color:'red'}} label={item.replace("_", " ")} />)
@@ -120,62 +95,7 @@ class Help extends Component {
 
 
     render() {
-        const cards = this.state.data.map(details => {
-            <div className='Card'>
-            <Card>
-              <CardHeader
-                title={details.user.name}
-                subtitle={"Mobile Number: " + details.user.phone}
-                actAsExpander={true}
-                showExpandableButton={true}
-              />
-              <CardActions>
-                <div>
-                <i style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blood Group: {details.user.bloodgroup}</i>
-                <p style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Has requested for:</p>
-                {
-                    Object.keys(details.resources).map(item => {
-                            if(item != 'desc' && item != 'ppl') {
-                                var bool = details.resources[item];
-                                if(bool === true)
-                                    return(<FlatButton style={{color:'green'}} label={item.replace("_", " ")} />)
-                                else
-                                    return(<FlatButton style={{color:'red'}} label={item.replace("_", " ")} />)
-                            }
-                        }
-                    )
-                }   
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <FlatButton lable={"Help Done"} />
-                </div>
-              </CardActions>
-              <CardText expendable={true}>
-
-                {/* <iframe 
-                 width="300" 
-                 height="170" 
-                 frameborder="0" 
-                 scrolling="no" 
-                 marginheight="0" 
-                 marginwidth="0" 
-                 src={"https://maps.google.com/maps?q='+" + details.location.latitude + "+','+" + details.location.longitude + "+'&hl=es;z=14&amp;output=embed"}
-                >
-                </iframe>
-                <br />
-                <small>
-                  <a 
-                   href={"https://maps.google.com/maps?q='+" + details.location.latitude + "+','+" + details.location.longitude + "+'&hl=es;z=14&amp;output=embed"}
-                   style="color:#0000FF;text-align:left" 
-                   target="_blank"
-                  >
-                    See map bigger
-                  </a>
-                </small> */}
-              </CardText>
-            </Card>
-            <br />
-        </div>
-        });
-        
+        console.log(this.state.data);
         return(
         <MuiThemeProvider>
             <div className="Help">
@@ -183,7 +103,7 @@ class Help extends Component {
                 title={<span>Help</span>}
               />
               <div className='Items'>
-                { this.state.data.map(object => this.genCard(object.details)) }
+                { this.state.data.map(object => this.genCard(object)) }
             </div>
             </div>
         </MuiThemeProvider>
