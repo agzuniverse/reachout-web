@@ -111,21 +111,21 @@ class Statistics extends Component {
     return (
       <MuiThemeProvider>
         <div className="Statistics">
-          <AppBar title={<span>Statistics</span>}/>
-            <ColumnChart style={{marginLeft: '30px'}} width="800px" data={[["Need Help", this.state.processData.needHelp], ["Receive Help", this.state.processData.receiveHelp]]} />
+          <AppBar title={<span>Analytics</span>}/>
+            <ColumnChart style={{marginLeft: '30px'}} width="800px" data={[["Need Help", this.state.processData.needHelp], ["Willing to help", this.state.processData.receiveHelp]]} />
           <div className='row'> 
             <span>
             <Paper style={style} zDepth={1}>
-              <h3>&nbsp; No. of people asking for housing: {this.state.processData.house_ask}&nbsp;&nbsp;</h3>   
+              <h3>&nbsp; No. of people asking for shelter: {this.state.processData.house_ask}&nbsp;&nbsp;</h3>   
             </Paper>
             </span>
             <span style={{paddingLeft: '150px'}}>
               <Paper style={style} zDepth={1}>
-                <h3>&nbsp; No. of people willing to provide housing: {this.state.processData.house_provide}&nbsp;&nbsp;</h3>   
+                <h3>&nbsp; No. of people willing to provide shelter: {this.state.processData.house_provide}&nbsp;&nbsp;</h3>   
               </Paper>
             </span>
           </div>
-          <BarChart width="800px" data={[["Need Housing", this.state.processData.house_ask], ["Provide Housing", this.state.processData.house_provide]]} />
+          <BarChart width="800px" data={[["Need shelter", this.state.processData.house_ask], ["willing to provide Shelter", this.state.processData.house_provide]]} />
           <div className='row2'>
             <span>
               <Paper style={style} zDepth={1}>
@@ -138,7 +138,7 @@ class Statistics extends Component {
               </Paper>
             </span>
           </div>
-          <BarChart width="800px" data={[["Need Blood", this.state.processData.blood_ask], ["Provide Blood", this.state.processData.blood_provide]]} />
+          <BarChart width="800px" data={[["Need Blood", this.state.processData.blood_ask], ["willing to Provide Blood", this.state.processData.blood_provide]]} />
           <div className='row3'>
              <span>
               <Paper style={style} zDepth={1}>
@@ -151,7 +151,7 @@ class Statistics extends Component {
               </Paper>
             </span>        
           </div>
-          <BarChart width="800px" data={[["Need Food", this.state.processData.food_ask], ["Provide Food", this.state.processData.food_provide]]} />
+          <BarChart width="800px" data={[["Need Food", this.state.processData.food_ask], ["willing to provide Food", this.state.processData.food_provide]]} />
         </div>
       </MuiThemeProvider>
     );

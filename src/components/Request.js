@@ -106,7 +106,7 @@ class Request extends Component {
         <MuiThemeProvider>
             <div className="Request">
               <AppBar
-                title={<span>Request</span>}
+                title={<span>Help offers</span>}
               />
               <div className='Items'>
                 { this.state.data.map(object => this.genCard(object)) }

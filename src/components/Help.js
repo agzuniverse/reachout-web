@@ -113,7 +113,6 @@ class Help extends Component {
               <AppBar
                 title={<span>Help Requests</span>}
               />
-<<<<<<< HEAD
               <SelectField
                 floatingLabelText="Filter By"
                 floatingLabelStyle={{fontSize:"30px",color:"black"}}
@@ -131,9 +130,6 @@ class Help extends Component {
                 <MenuItem value="medical" primaryText="medical" />
                 <MenuItem value="transport" primaryText="transport" />
               </SelectField>
-=======
-
->>>>>>> d7836f32a2457b55492bf4a1b89194d4cd0a3e4e
               <div className='Items'>
                 { this.state.data.map((object) => {
                   console.log(this.state.filter)
