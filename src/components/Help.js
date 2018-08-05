@@ -7,7 +7,8 @@ import {List, ListItem} from 'material-ui/List';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import '../css/Help.css';
 
 class Help extends Component {
@@ -15,10 +16,16 @@ class Help extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           data: [], 
+          data: [], 
+          filter:"all"
+          
         };
     }
 
+  handleChange = (e,i,v) => {
+    console.log(e.target);
+    this.setState({filter:v});
+  }
 
     componentWillMount() {
         let URL = "https://8f555758.ngrok.io/api/getallreqs";
@@ -63,7 +70,7 @@ class Help extends Component {
                         }
                     )
                 }   
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <RaisedButton style={{marginLeft: '170px'}} secondary={true} label={"Help Done"} />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <RaisedButton style={{marginLeft: '170px'}} secondary={true} label={"Request addressed"} />
                 </div>
               </CardActions>
               <CardText expendable={true}>
@@ -77,9 +84,7 @@ class Help extends Component {
                  marginwidth="0" 
                  src={"https://maps.google.com/maps?q='+" + details.location.latitude + "+','+" + details.location.longitude + "+'&hl=es;z=14&amp;output=embed"}
                 >
-                </iframe>
-                <br />
-                <small>
+                </iframe> <br /> <small>
                   <a 
                    href={"https://maps.google.com/maps?q='+" + details.location.latitude + "+','+" + details.location.longitude + "+'&hl=es;z=14&amp;output=embed"}
                    style="color:#0000FF;text-align:left" 
@@ -103,9 +108,39 @@ class Help extends Component {
               <AppBar
                 title={<span>Help</span>}
               />
+              <SelectField
+                floatingLabelText="Filter By"
+                floatingLabelStyle={{fontSize:"30px",color:"black"}}
+                value={this.state.filter}
+                onChange={this.handleChange}
+                style={{marginLeft:"50px"}}
+              >
+                <MenuItem value="all" primaryText="all" />
+                <MenuItem value="food" primaryText="food" />
+                <MenuItem value="water" primaryText="water" />
+                <MenuItem value="shelter" primaryText="shelter" />
+                <MenuItem value="firstaid" primaryText="firstaid" />
+                <MenuItem value="blankets" primaryText="blankets" />
+                <MenuItem value="clothes" primaryText="clothes" />
+                <MenuItem value="medical" primaryText="medical" />
+                <MenuItem value="transport" primaryText="transport" />
+              </SelectField>
               <div className='Items'>
-                { this.state.data.map(object => this.genCard(object)) }
-            </div>
+                { this.state.data.map((object) => {
+                  console.log(this.state.filter)
+                  if( this.state.filter == "all" ){
+                    return(this.genCard(object));
+                  } else {
+                    let filter = this.state.filter;
+                    console.log(this.state.filter, object.resources[filter]);
+                    if (object.resources[filter] == "true"){
+                      return(this.genCard(object));
+                    } else {
+                      return null
+                    }
+                  }
+                } )}
+              </div>
             </div>
         </MuiThemeProvider>
         );
