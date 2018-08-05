@@ -47,6 +47,11 @@ class Help extends Component {
                 actAsExpander={true}
                 showExpandableButton={true}
               />
+              <iframe width="20%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-122.11127758026124%2C37.39880087820428%2C-122.07376956939699%2C37.42416186836296&amp;layer=mapnik&amp;marker=37.411509709729124%2C-122.09252255390777" style={{border: '1px solid black'}}>
+                </iframe><br/>
+                <small>
+                    <a href="https://www.openstreetmap.org/?mlat=37.4115&amp;mlon=-122.0925#map=15/37.4115/-122.0925">View Larger Map</a>
+                </small>
               <CardActions>
                 <div>
                 <i style={{fontSize: '12px'}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blood Group: {details.user.bloodgroup}</i>
@@ -103,6 +108,7 @@ class Help extends Component {
               <AppBar
                 title={<span>Help Requests</span>}
               />
+
               <div className='Items'>
                 { this.state.data.map(object => this.genCard(object)) }
             </div>
