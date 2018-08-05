@@ -101,7 +101,7 @@ class Help extends Component {
         <MuiThemeProvider>
             <div className="Help">
               <AppBar
-                title={<span>Help</span>}
+                title={<span>Help Requests</span>}
               />
               <div className='Items'>
                 { this.state.data.map(object => this.genCard(object)) }
